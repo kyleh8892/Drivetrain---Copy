@@ -77,11 +77,11 @@ public class Drivetrain extends SubsystemBase {
 
     SmartDashboard.putNumber("P Velocity", .025);
 
-    _leftPID.setP(SmartDashboard.getNumber("P Velocity", 0));
+    _leftPID.setP(.001);//SmartDashboard.getNumber("P Velocity", 0));
     _leftPID.setFeedbackDevice(_leftEncoder); 
 
 
-    _rightPID.setP(SmartDashboard.getNumber("P Velocity", 0));
+    _rightPID.setP(.001);//SmartDashboard.getNumber("P Velocity", 0));
     _rightPID.setFeedbackDevice(_rightEncoder);
 
 
@@ -162,11 +162,11 @@ public Rotation2d getHeading(){
     // This method will be called once per scheduler run
 
     _odometry.update((getHeading()), 
-                      _leftEncoder.getPosition() * 1,
-                      _rightEncoder.getPosition()  * 1);
+                      _leftEncoder.getPosition(),
+                      _rightEncoder.getPosition());
 
-    _leftPID.setP(SmartDashboard.getNumber("P Velocity", 0));
-    _rightPID.setP(SmartDashboard.getNumber("P Velocity", 0));
+    //_leftPID.setP(SmartDashboard.getNumber("P Velocity", 0));
+    //_rightPID.setP(SmartDashboard.getNumber("P Velocity", 0));
 
     //_field.setRobotPose(_odometry.getPoseMeters());
 
