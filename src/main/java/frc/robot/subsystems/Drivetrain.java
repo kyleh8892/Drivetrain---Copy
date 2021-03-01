@@ -50,20 +50,19 @@ public class Drivetrain extends SubsystemBase {
   /** Creates a new ExampleSubsystem. */
   public Drivetrain() {
 
-    _leftBack.restoreFactoryDefaults();
     _leftBack.setIdleMode(IdleMode.kBrake);
 
-    _leftFront.restoreFactoryDefaults();
     _leftFront.setIdleMode(IdleMode.kBrake);
 
-    _rightBack.restoreFactoryDefaults();
     _rightBack.setIdleMode(IdleMode.kBrake);
 
-    _rightFront.restoreFactoryDefaults();
     _rightBack.setIdleMode(IdleMode.kBrake);
 
     _leftBack.follow(_leftFront);
     _rightBack.follow(_rightFront);
+
+    _leftFront.setInverted(true);
+    _rightFront.setInverted(true);
 
 
     _leftEncoder.setPositionConversionFactor(.053848); // rotations to meters
@@ -73,9 +72,8 @@ public class Drivetrain extends SubsystemBase {
     _rightEncoder.setVelocityConversionFactor(.0008974);
 
     resetEncoders();
-    _odometry = new DifferentialDriveOdometry(getHeading());
 
-    SmartDashboard.putNumber("P Velocity", .025);
+    SmartDashboard.putNumber("P Velocity", .001);
 
     _leftPID.setP(.001);//SmartDashboard.getNumber("P Velocity", 0));
     _leftPID.setFeedbackDevice(_leftEncoder); 
@@ -88,6 +86,8 @@ public class Drivetrain extends SubsystemBase {
     //_drive.setSafetyEnabled(false);
 
     SmartDashboard.putData("Field", _field);
+
+    _odometry = new DifferentialDriveOdometry(getHeading());
 
   }
 
@@ -142,7 +142,7 @@ public Rotation2d getHeading(){
   }
 
   public void zeroHeading() {
-    _gyro.setYaw(0);
+    _gyro.setYaw(0.0);
   }
 
   public void setVelocity(double left, double right){
@@ -150,7 +150,7 @@ public Rotation2d getHeading(){
     SmartDashboard.putNumber("left MPS", left);
     SmartDashboard.putNumber("right MPS", right);
  
-    _leftPID.setReference(-left, ControlType.kVelocity);
+    _leftPID.setReference(left, ControlType.kVelocity);
 
     _rightPID.setReference(right, ControlType.kVelocity);
     

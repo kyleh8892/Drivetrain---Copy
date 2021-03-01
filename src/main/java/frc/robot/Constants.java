@@ -28,7 +28,7 @@ public final class Constants {
     public static final double kaVoltSecondsSquaredPerMeter = 0.453;
 
     // Example value only - as above, this must be tuned for your drive!
-    public static final double kPDriveVel = .188;
+    public static final double kPDriveVel = .1;
 
     public static final double kTrackwidthMeters = .5588;
 
