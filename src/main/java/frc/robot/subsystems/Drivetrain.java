@@ -75,11 +75,11 @@ public class Drivetrain extends SubsystemBase {
 
     SmartDashboard.putNumber("P Velocity", .001);
 
-    _leftPID.setP(.001);//SmartDashboard.getNumber("P Velocity", 0));
+    //_leftPID.setP(.001);//SmartDashboard.getNumber("P Velocity", 0));
     _leftPID.setFeedbackDevice(_leftEncoder); 
 
 
-    _rightPID.setP(.001);//SmartDashboard.getNumber("P Velocity", 0));
+    //_rightPID.setP(.001);//SmartDashboard.getNumber("P Velocity", 0));
     _rightPID.setFeedbackDevice(_rightEncoder);
 
 
@@ -94,7 +94,7 @@ public class Drivetrain extends SubsystemBase {
   public void tankDriveVolts(double left, double right){
 
     _rightFront.setVoltage(right);
-    _leftFront.setVoltage(left);
+    _leftFront.setVoltage(-left);
   }
 
   public double[] getYPR(){
@@ -107,7 +107,7 @@ public class Drivetrain extends SubsystemBase {
 public Rotation2d getHeading(){
   double ypr[] = {0,0,0};
   _gyro.getYawPitchRoll(ypr);
-  return Rotation2d.fromDegrees(Math.IEEEremainder(ypr[0], 360.0d) * -1.0d);
+  return Rotation2d.fromDegrees(Math.IEEEremainder(ypr[0], 360.0d) * 1.0d);
 }
 
   public Pose2d getPose() {
@@ -165,10 +165,7 @@ public Rotation2d getHeading(){
                       _leftEncoder.getPosition(),
                       _rightEncoder.getPosition());
 
-    //_leftPID.setP(SmartDashboard.getNumber("P Velocity", 0));
-    //_rightPID.setP(SmartDashboard.getNumber("P Velocity", 0));
-
-    //_field.setRobotPose(_odometry.getPoseMeters());
+   // _field.setRobotPose(_odometry.getPoseMeters());
 
   }
 
